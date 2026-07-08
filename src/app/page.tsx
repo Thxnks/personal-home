@@ -68,8 +68,8 @@ function HomeContent() {
               {capabilityGroups.map((group) => (
                 <article
                   key={group.key}
-                  className="group relative grid gap-4 rounded-2xl border border-transparent px-4 py-6 transition-all duration-300 ease-out hover:-translate-y-0.5 hover:border-black/5 hover:bg-white/55 hover:shadow-[0_12px_35px_rgba(0,0,0,0.05)] dark:hover:border-white/10 dark:hover:bg-white/[0.06] dark:hover:shadow-[0_14px_36px_rgba(0,0,0,0.22)] md:grid-cols-[240px_1fr] md:gap-8 md:px-6">
-                  <div>
+                  className="group relative grid gap-4 rounded-2xl border border-transparent px-4 py-6 transition-all duration-300 ease-out hover:-translate-y-0.5 hover:border-black/5 hover:bg-white/55 hover:shadow-[0_12px_35px_rgba(0,0,0,0.05)] dark:hover:border-white/10 dark:hover:bg-white/[0.06] dark:hover:shadow-[0_14px_36px_rgba(0,0,0,0.22)] md:grid-cols-[360px_minmax(0,1fr)] md:gap-8 md:px-6">
+                  <div className="min-w-0">
                     <div className="flex items-baseline gap-3">
                       <span className="font-serif text-sm text-black/40 transition-colors duration-300 group-hover:text-black/55 dark:text-[#b9aca0]/70 dark:group-hover:text-[#f0e5d8]/70 md:text-base">{group.index}</span>
                       <h3 className="whitespace-nowrap font-serif text-xl font-medium text-foreground transition-colors duration-300 group-hover:text-black dark:group-hover:text-[#f5efe7] md:text-2xl">{t.skills.groups[group.key].title}</h3>
@@ -78,7 +78,7 @@ function HomeContent() {
                       {t.skills.groups[group.key].description}
                     </p>
                   </div>
-                  <div className="flex flex-wrap content-start gap-2.5 md:pt-1">
+                  <div className="flex min-w-0 flex-wrap content-start gap-2.5 md:pt-1">
                     {group.skills.map((skill) => (
                       <span
                         key={skill}

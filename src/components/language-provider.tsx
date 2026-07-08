@@ -1,4 +1,4 @@
-﻿'use client'
+'use client'
 
 import React from 'react'
 import { type Language, translations } from '@/lib/translations'
@@ -13,18 +13,13 @@ type LanguageContextValue = {
 const LanguageContext = React.createContext<LanguageContextValue | null>(null)
 
 export function LanguageProvider({ children }: { children: React.ReactNode }) {
-  const [language, setLanguageState] = React.useState<Language>(() => {
-    if (typeof window === 'undefined') {
-      return 'en'
-    }
-
-    return window.localStorage.getItem('language') === 'zh' ? 'zh' : 'en'
-  })
+  const [language, setLanguageState] = React.useState<Language>('en')
 
   React.useEffect(() => {
     const savedLanguage = window.localStorage.getItem('language')
     const nextLanguage: Language = savedLanguage === 'zh' ? 'zh' : 'en'
 
+    setLanguageState(nextLanguage)
     document.documentElement.lang = nextLanguage === 'zh' ? 'zh-CN' : 'en'
     document.documentElement.dataset.language = nextLanguage
   }, [])

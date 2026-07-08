@@ -108,7 +108,7 @@ export const translations = {
     },
     about: {
       eyebrow: 'About',
-      title: 'About Hao Xinran',
+      title: 'About Me',
       paragraphs: [
         'I am an undergraduate student majoring in Artificial Intelligence, shifting from traditional backend development toward LLM applications and AI Agent development. Rather than only implementing business APIs, I care more about combining large language models, tool calling, and web products into intelligent applications that are genuinely useful.',
         'I am currently learning and practicing RAG, Tool Calling, MCP, Prompt Engineering, and Agent workflows, and I am especially interested in companion agents, human-AI interaction, and emotionally supportive AI products.',

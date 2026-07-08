@@ -1,4 +1,4 @@
-﻿'use client'
+'use client'
 
 import React from 'react'
 import Link from 'next/link'
@@ -25,10 +25,7 @@ export const HeroHeader = () => {
     const [menuState, setMenuState] = React.useState(false)
     const [isScrolled, setIsScrolled] = React.useState(false)
     const [activeSection, setActiveSection] = React.useState<NavId>('projects')
-    const [theme, setTheme] = React.useState<'light' | 'dark'>(() => {
-        if (typeof window === 'undefined') return 'light'
-        return window.localStorage.getItem('theme') === 'dark' ? 'dark' : 'light'
-    })
+    const [theme, setTheme] = React.useState<'light' | 'dark'>('light')
     const scrollLockTimeoutRef = React.useRef<number | null>(null)
 
     const updateActiveSection = React.useCallback(() => {
@@ -58,6 +55,7 @@ export const HeroHeader = () => {
         const savedTheme = window.localStorage.getItem('theme')
         const nextTheme = savedTheme === 'dark' ? 'dark' : 'light'
 
+        setTheme(nextTheme)
         document.documentElement.classList.toggle('dark', nextTheme === 'dark')
     }, [])
 
