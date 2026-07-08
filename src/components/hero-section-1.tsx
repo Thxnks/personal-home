@@ -1,4 +1,4 @@
-﻿'use client'
+'use client'
 
 import React from 'react'
 import Link from 'next/link'
@@ -44,21 +44,25 @@ function TypewriterTitle({ first, second }: { first: string; second: string }) {
     )
 }
 
-const skills = [
-    { name: 'Java', position: 'sm:left-[20%] sm:top-3 lg:left-[18%] lg:top-4', emphasis: '', floatDelay: '0ms', floatDistance: '6px', floatDuration: '3.2s' },
-    { name: 'Spring Boot', position: 'sm:left-1/2 sm:top-0 sm:-translate-x-1/2 lg:top-0', emphasis: '', floatDelay: '260ms', floatDistance: '8px', floatDuration: '3.7s' },
-    { name: 'MySQL', position: 'sm:right-[20%] sm:top-3 lg:right-[18%] lg:top-4', emphasis: '', floatDelay: '520ms', floatDistance: '7px', floatDuration: '3.4s' },
-    { name: 'Redis', position: 'sm:left-[15%] sm:top-[86px] lg:left-[11%] lg:top-[110px]', emphasis: '', floatDelay: '760ms', floatDistance: '6px', floatDuration: '3.9s' },
-    { name: 'RabbitMQ', position: 'sm:left-1/2 sm:top-[92px] sm:-translate-x-1/2 lg:top-[122px]', emphasis: '', floatDelay: '340ms', floatDistance: '8px', floatDuration: '3.5s' },
-    { name: 'Docker', position: 'sm:right-[15%] sm:top-[86px] lg:right-[11%] lg:top-[110px]', emphasis: '', floatDelay: '620ms', floatDistance: '7px', floatDuration: '4s' },
-    { name: 'Linux', position: 'sm:left-[24%] sm:top-[176px] lg:left-[21%] lg:top-[230px]', emphasis: '', floatDelay: '180ms', floatDistance: '6px', floatDuration: '3.6s' },
-    { name: 'Git', position: 'sm:left-1/2 sm:top-[166px] sm:-translate-x-1/2 lg:top-[215px]', emphasis: '', floatDelay: '480ms', floatDistance: '7px', floatDuration: '3.3s' },
-    { name: 'Vue', position: 'sm:right-[24%] sm:top-[176px] lg:right-[21%] lg:top-[230px]', emphasis: '', floatDelay: '700ms', floatDistance: '6px', floatDuration: '3.8s' },
-    { name: 'AI / LLM', position: 'sm:left-1/2 sm:top-[240px] sm:-translate-x-1/2 lg:top-[315px]', emphasis: '', floatDelay: '420ms', floatDistance: '8px', floatDuration: '4s' },
-]
+const skillLabels = {
+    en: ['Python', 'TypeScript', 'LLM', 'Agent', 'Harness Engineering', 'Tool Calling', 'MCP', 'RAG', 'Web App', 'Companion Agent'],
+    zh: ['Python', 'Deep Learning', 'LLM', 'Agent', 'Harness Engineering', 'Tool Calling', 'MCP', 'RAG', 'Web App', '陪伴型智能体'],
+} as const
 
+const skills = [
+    { position: 'sm:left-[20%] sm:top-3 lg:left-[18%] lg:top-4', emphasis: '', floatDelay: '0ms', floatDistance: '6px', floatDuration: '3.2s' },
+    { position: 'sm:left-1/2 sm:top-0 sm:-translate-x-1/2 lg:top-0', emphasis: '', floatDelay: '260ms', floatDistance: '8px', floatDuration: '3.7s' },
+    { position: 'sm:right-[20%] sm:top-3 lg:right-[18%] lg:top-4', emphasis: '', floatDelay: '520ms', floatDistance: '7px', floatDuration: '3.4s' },
+    { position: 'sm:left-[15%] sm:top-[86px] lg:left-[11%] lg:top-[110px]', emphasis: '', floatDelay: '760ms', floatDistance: '6px', floatDuration: '3.9s' },
+    { position: 'sm:left-1/2 sm:top-[92px] sm:-translate-x-1/2 lg:top-[122px]', emphasis: '', floatDelay: '340ms', floatDistance: '8px', floatDuration: '3.5s' },
+    { position: 'sm:right-[15%] sm:top-[86px] lg:right-[11%] lg:top-[110px]', emphasis: '', floatDelay: '620ms', floatDistance: '7px', floatDuration: '4s' },
+    { position: 'sm:left-[24%] sm:top-[176px] lg:left-[21%] lg:top-[230px]', emphasis: '', floatDelay: '180ms', floatDistance: '6px', floatDuration: '3.6s' },
+    { position: 'sm:left-1/2 sm:top-[166px] sm:-translate-x-1/2 lg:top-[215px]', emphasis: '', floatDelay: '480ms', floatDistance: '7px', floatDuration: '3.3s' },
+    { position: 'sm:right-[24%] sm:top-[176px] lg:right-[21%] lg:top-[230px]', emphasis: '', floatDelay: '700ms', floatDistance: '6px', floatDuration: '3.8s' },
+    { position: 'sm:left-1/2 sm:top-[240px] sm:-translate-x-1/2 lg:top-[315px]', emphasis: '', floatDelay: '420ms', floatDistance: '8px', floatDuration: '4s' },
+]
 export default function HeroSection() {
-    const { t } = useLanguage()
+    const { language, t } = useLanguage()
     const [isVisible, setIsVisible] = React.useState(false)
 
     React.useEffect(() => {
@@ -100,14 +104,18 @@ export default function HeroSection() {
                                 </Button>
                             </div>
                             <div className={`relative mx-auto mt-10 flex h-auto w-full max-w-sm flex-wrap content-start justify-center gap-3 overflow-visible pt-2 transition-all delay-500 duration-700 ease-out sm:mt-14 sm:block sm:h-[300px] sm:max-w-5xl sm:pt-6 md:h-[320px] lg:mt-20 lg:h-[390px] lg:max-w-6xl ${revealClass}`}>
-                                {skills.map((skill) => (
+                                {skills.map((skill, index) => {
+                                    const name = skillLabels[language][index]
+
+                                    return (
                                     <Card
-                                        key={skill.name}
+                                        key={name}
                                         style={{ '--float-delay': skill.floatDelay, '--float-distance': skill.floatDistance, '--float-duration': skill.floatDuration } as React.CSSProperties}
                                         className={`hero-skill-float flex h-10 items-center justify-center rounded-full border border-zinc-200/80 bg-white/70 px-4 text-zinc-800 shadow-sm backdrop-blur-sm dark:border-white/10 dark:bg-[#34302a]/85 dark:text-[#f6efe5] transition-all duration-300 hover:-translate-y-1 hover:shadow-md sm:absolute sm:h-11 sm:px-5 md:h-12 md:px-6 lg:h-14 lg:px-8 ${skill.position} ${skill.emphasis}`}>
-                                        <span className="text-nowrap text-center font-serif text-sm font-medium leading-none sm:text-base md:text-lg lg:text-xl">{skill.name}</span>
+                                        <span className="text-nowrap text-center font-serif text-sm font-medium leading-none sm:text-base md:text-lg lg:text-xl">{name}</span>
                                     </Card>
-                                ))}
+                                    )
+                                })}
                             </div>
                         </div>
                     </div>

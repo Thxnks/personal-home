@@ -14,18 +14,17 @@ const LanguageContext = React.createContext<LanguageContextValue | null>(null)
 
 export function LanguageProvider({ children }: { children: React.ReactNode }) {
   const [language, setLanguageState] = React.useState<Language>(() => {
-    if (typeof document === 'undefined') {
+    if (typeof window === 'undefined') {
       return 'en'
     }
 
-    return document.documentElement.dataset.language === 'zh' ? 'zh' : 'en'
+    return window.localStorage.getItem('language') === 'zh' ? 'zh' : 'en'
   })
 
   React.useEffect(() => {
     const savedLanguage = window.localStorage.getItem('language')
     const nextLanguage: Language = savedLanguage === 'zh' ? 'zh' : 'en'
 
-    setLanguageState(nextLanguage)
     document.documentElement.lang = nextLanguage === 'zh' ? 'zh-CN' : 'en'
     document.documentElement.dataset.language = nextLanguage
   }, [])

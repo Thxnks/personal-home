@@ -1,4 +1,4 @@
-﻿@import "tailwindcss";
+@import "tailwindcss";
 @import "tw-animate-css";
 @import "shadcn/tailwind.css";
 
@@ -53,6 +53,31 @@
   --font-english: Georgia, Cambria, "Times New Roman", Times, serif;
   --font-chinese: "Noto Serif SC", "Source Han Serif SC", "Songti SC", serif;
   --font-site-family: var(--font-english);
+  --bg: #e6eef6;
+  --surface: #e7eff7;
+  --surface-soft: #edf4fa;
+  --text-main: #33465f;
+  --text-muted: #71869f;
+  --text-soft: #8fa2b8;
+  --accent: #6f92bd;
+  --radius-lg: 36px;
+  --radius-md: 24px;
+  --radius-pill: 999px;
+  --shadow-raised: 10px 10px 24px rgba(120, 140, 160, 0.22), -10px -10px 24px rgba(255, 255, 255, 0.75);
+  --shadow-soft: 6px 6px 14px rgba(120, 140, 160, 0.18), -6px -6px 14px rgba(255, 255, 255, 0.72);
+  --shadow-inset: inset 5px 5px 12px rgba(120, 140, 160, 0.16), inset -5px -5px 12px rgba(255, 255, 255, 0.75);
+  --neu-bg: #e6eef6;
+  --neu-surface: #e7eff7;
+  --neu-surface-soft: #edf4fa;
+  --neu-text: #33465f;
+  --neu-muted: #71869f;
+  --neu-soft-text: #8fa2b8;
+  --neu-accent: #6f92bd;
+  /* Neumorphism shadow tokens: paired dark/light shadows create raised surfaces; inset shadows create pressed surfaces. */
+  --neu-shadow-raised: var(--shadow-raised);
+  --neu-shadow-small: var(--shadow-soft);
+  --neu-shadow-small-blue: 8px 8px 18px rgba(92, 118, 146, 0.24), -8px -8px 18px rgba(255, 255, 255, 0.62);
+  --neu-shadow-inset: var(--shadow-inset);
   --background: oklch(1 0 0);
   --foreground: oklch(0.145 0 0);
   --card: oklch(1 0 0);
@@ -158,13 +183,83 @@
   }
   body {
     @apply text-foreground;
-    background-color: #fbf8f1;
+    background-color: var(--neu-bg);
   }
   html {
     @apply scroll-smooth;
   }
 }
 @layer utilities {
+  .neu-page {
+    background:
+      radial-gradient(circle at 12% 8%, rgba(255, 255, 255, 0.5), transparent 22rem),
+      radial-gradient(circle at 88% 2%, rgba(111, 146, 189, 0.12), transparent 26rem),
+      linear-gradient(180deg, var(--neu-bg) 0%, #dfe8f1 100%);
+  }
+
+  .neu-panel,
+  .neu-button,
+  .neu-inset,
+  .neu-soft,
+  .neu-tag {
+    background: var(--neu-surface);
+  }
+
+  .neu-panel {
+    box-shadow: var(--neu-shadow-raised);
+  }
+
+  .neu-card {
+    background: var(--neu-surface);
+    box-shadow: var(--neu-shadow-raised);
+  }
+
+  .neu-card:hover {
+    transform: translateY(-3px);
+    box-shadow:
+      12px 12px 28px rgba(100, 122, 145, 0.24),
+      -12px -12px 26px rgba(255, 255, 255, 0.8);
+  }
+
+  .neu-soft {
+    background: var(--neu-surface-soft);
+    box-shadow: var(--neu-shadow-small);
+  }
+
+  .neu-button {
+    box-shadow: var(--neu-shadow-small);
+  }
+
+  .neu-button-primary {
+    background: linear-gradient(145deg, #789bc5, var(--neu-accent));
+    box-shadow:
+      8px 8px 18px rgba(92, 118, 146, 0.28),
+      -8px -8px 18px rgba(255, 255, 255, 0.65);
+  }
+
+  .neu-button:hover {
+    transform: translateY(-2px);
+    box-shadow:
+      8px 8px 18px rgba(105, 126, 148, 0.22),
+      -8px -8px 18px rgba(255, 255, 255, 0.78);
+  }
+
+  .neu-button:active {
+    transform: translateY(0);
+    box-shadow: var(--neu-shadow-inset);
+  }
+
+  .neu-inset {
+    box-shadow: var(--neu-shadow-inset);
+  }
+
+  .neu-tag {
+    background: rgba(237, 244, 250, 0.72);
+    box-shadow:
+      3px 3px 8px rgba(120, 140, 160, 0.13),
+      -3px -3px 8px rgba(255, 255, 255, 0.58);
+  }
+
   .hero-type-cursor {
     width: 0.08em;
     height: 0.82em;

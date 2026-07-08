@@ -1,4 +1,4 @@
-﻿export type Language = 'en' | 'zh'
+export type Language = 'en' | 'zh'
 
 export const translations = {
   en: {
@@ -12,9 +12,9 @@ export const translations = {
       contact: 'Contact',
     },
     hero: {
-      titleFirst: 'Hey, I am',
-      titleSecond: 'Hao Xinran',
-      subtitle: 'I build thoughtful backend systems, AI-powered tools, and web experiences with clarity and purpose.',
+      titleFirst: "Hi, I'm",
+      titleSecond: 'Xinran Hao',
+      subtitle: 'I am shifting from backend development to AI Agent development, with a focus on LLM applications, tool calling, and companion-oriented agents.',
       cta: 'Explore My Work',
     },
     projects: {
@@ -144,7 +144,7 @@ export const translations = {
     hero: {
       titleFirst: '你好，我是',
       titleSecond: '郝欣冉',
-      subtitle: '我专注于后端开发，也在探索 AI 工具和 Web 应用的结合。',
+      subtitle: '我正在关注 Agent 开发，兴趣在于 LLM 应用、工具调用与陪伴型智能体的产品化实现。',
       cta: '查看项目',
     },
     projects: {
