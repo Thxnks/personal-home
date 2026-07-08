@@ -29,28 +29,29 @@ export const translations = {
       whatILearned: 'What I Learned',
       items: {
         aiCodeHelper: {
-          description: 'A Spring Boot + Vue full-stack AI coding assistant centered on a self-built ReAct Agent Runtime for Hot100 algorithm coaching, execution tracing, and backend interview preparation.',
+          description: 'A Spring Boot + Vue AI coding assistant built around a self-built ReAct Agent Runtime, with plan-before-act execution, permission-gated tools, hybrid RAG, background tasks, and traceable Hot100 coaching.',
           highlights: [
-            'Built a custom ReAct Agent Runtime with model turns, tool calls, tool results, final answers, and up to 8 autonomous turns.',
-            'Implemented tool permission gating across READ, WRITE, EXTERNAL, and SENSITIVE levels with structured tool_result errors.',
-            'Added three-tier context compaction, structured error recovery, hook events, and step-level SSE streaming for observable agent execution.',
-            'Designed AgentTask, RuntimeSlot, and AgentStep persistence so retries, runtime traces, and executor failover can be inspected clearly.',
-            'Integrated LangChain4j with DashScope/Qwen while keeping orchestration logic inside the Spring Boot backend.',
-            'Built explainable local RAG for Hot100 markdown and JSON resources with scored retrieval results and problem metadata.',
+            'Built a custom ReAct Agent Runtime with a validated plan-before-act stage and up to 8 autonomous model/tool turns.',
+            'Implemented permission-gated tools across READ, WRITE, EXTERNAL, and SENSITIVE levels with structured tool_result recovery instead of hard failures.',
+            'Added Redis-backed tool idempotency using SHA-256 hashes to detect repeated tool calls and replay cached results during retries.',
+            'Designed three-tier context compaction, tiered tool recovery, hook events, and step-level SSE streaming for observable agent execution.',
+            'Modeled AgentTask, RuntimeSlot, and AgentStep so retries, runtime traces, background tasks, and executor watchdogs can be inspected clearly.',
+            'Built hybrid explainable RAG for Hot100 resources by combining Redis vector similarity with deterministic keyword scoring through HybridRanker.',
             'Added long-term memory for user preferences, weaknesses, wrong answers, next actions, and notes.',
-            'Used Spring Boot 3.5, Java 21, Spring Security JWT, JPA, Flyway, Redis caching, RabbitMQ, and Docker Compose for backend engineering.',
+            'Used Spring Boot 3.5, Java 21, Spring Security JWT, JPA, Flyway, Redis, LangChain4j, DashScope/Qwen, and Docker Compose.',
           ],
         },
         citylifeReview: {
-          description: 'A Spring Boot backend service for a local life-review platform, focused on Redis business features, nearby shop search, social feeds, and reliable high-concurrency voucher ordering.',
+          description: 'A Spring Boot 3.4 backend for a local life-review platform, combining Redis business patterns, Elasticsearch search, RabbitMQ flash-sale ordering, and a Spring AI RAG recommendation agent.',
           highlights: [
-            'Implemented phone-code login with Redis token storage and interceptor-based user context handling.',
-            'Built Redis-backed shop caching, cache penetration protection, shop type cache invalidation, GEO nearby search, ZSet likes/feed, Set follow relationships, and Bitmap sign-in.',
-            'Used Redis Lua to atomically check voucher stock, one-user-one-order constraints, pre-deduct stock, and record purchase qualification.',
-            'Built RabbitMQ asynchronous voucher order creation with persisted PROCESSING state, publisher confirm, return callback, manual ACK, and dead-letter queue handling.',
-            'Added Redis rollback and scheduled compensation for stale PROCESSING orders to reduce Redis/MySQL inconsistency after MQ or consumer failures.',
-            'Combined Redisson user-level locks and MySQL unique indexes to prevent duplicate voucher orders under concurrency.',
-            'Provided Docker Compose deployment for the application, MySQL, Redis, and RabbitMQ.',
+            'Implemented phone-code login, Redis token storage, shop caching, GEO nearby search, ZSet likes/feed, Set follows, and Bitmap sign-in.',
+            'Built high-concurrency voucher ordering with Redis Lua stock checks, one-user-one-order constraints, pre-deducted stock, and purchase qualification records.',
+            'Designed RabbitMQ async order creation with persisted PROCESSING state, publisher confirm, return callback, manual ACK, DLQ, Redis rollback, and stale-order compensation.',
+            'Used Redisson distributed locks, RRateLimiter-based declarative rate limiting, and MySQL unique indexes for concurrency control.',
+            'Added Elasticsearch full-text shop search with geo-distance sorting and structured shop document indexing.',
+            'Built a Spring AI recommendation agent with ChatClient, tool calling, chat memory, and preference extraction stored in Redis.',
+            'Implemented semantic review search through a RAG pipeline with multi-query expansion, HyDE, vector retrieval, LLM reranking, and sentiment tagging.',
+            'Documented APIs with SpringDoc OpenAPI and added CI/CD support through GitHub Actions.',
           ],
         },
         personalPortfolio: {
@@ -159,28 +160,29 @@ export const translations = {
       whatILearned: '学到了什么',
       items: {
         aiCodeHelper: {
-          description: '一个基于 Spring Boot + Vue 的 AI 编程助手项目，核心是自研 ReAct Agent Runtime，用于 Hot100 算法辅导、执行链路追踪和后端面试准备。',
+          description: '一个基于 Spring Boot + Vue 的 AI 编程助手项目，核心是自研 ReAct Agent Runtime，支持计划先行、工具权限门控、Hybrid RAG、后台任务和 Hot100 执行链路追踪。',
           highlights: [
-            '自研 ReAct Agent Runtime，支持 model turn、tool_use、tool_result、final_answer 和最多 8 轮自主执行。',
+            '自研 ReAct Agent Runtime，加入 plan-before-act 阶段，对执行计划、工具顺序和工具覆盖率做结构化校验，最多支持 8 轮自主执行。',
             '实现 READ、WRITE、EXTERNAL、SENSITIVE 四级工具权限门控，被拒绝的工具调用会返回结构化 tool_result，避免直接中断 Agent 流程。',
-            '加入三层上下文压缩、结构化异常恢复、事件钩子和步骤级 SSE 流式输出，让 Agent 执行过程可观察。',
-            '设计 AgentTask、RuntimeSlot、AgentStep 数据模型，支持重试、runtime trace 和执行步骤排查。',
-            '集成 LangChain4j 与 DashScope/Qwen，但将 Agent 编排逻辑保留在 Spring Boot 后端中实现。',
-            '为 Hot100 markdown 和 JSON 资源构建可解释本地 RAG，返回带评分和题目元数据的检索结果。',
+            '使用 Redis + SHA-256 实现工具幂等保护，识别重复工具调用，并在重试场景中复用缓存结果。',
+            '加入三层上下文压缩、分级工具恢复、事件钩子和步骤级 SSE 流式输出，让 Agent 执行过程可观察。',
+            '设计 AgentTask、RuntimeSlot、AgentStep 数据模型，支持重试、runtime trace、后台任务和 watchdog 超时检查。',
+            '为 Hot100 资源构建 Hybrid RAG，将 Redis 向量相似度和关键词评分通过 HybridRanker 合并，返回可解释检索结果。',
             '实现长期记忆，记录用户偏好、薄弱点、错题、下一步行动和笔记。',
-            '使用 Spring Boot 3.5、Java 21、Spring Security JWT、JPA、Flyway、Redis 缓存、RabbitMQ 和 Docker Compose 完成后端工程化。',
+            '使用 Spring Boot 3.5、Java 21、Spring Security JWT、JPA、Flyway、Redis、LangChain4j、DashScope/Qwen 和 Docker Compose 完成工程化。',
           ],
         },
         citylifeReview: {
-          description: '一个本地生活点评平台后端服务，重点实践 Redis 业务场景、附近商铺搜索、社交 Feed 流，以及高并发优惠券秒杀下单的可靠性设计。',
+          description: '一个基于 Spring Boot 3.4 的本地生活点评平台后端，结合 Redis 业务场景、Elasticsearch 搜索、RabbitMQ 秒杀下单和 Spring AI RAG 推荐 Agent。',
           highlights: [
-            '基于 Redis token 存储实现手机验证码登录，并通过拦截器维护用户上下文。',
-            '使用 Redis 缓存、缓存穿透保护、商铺类型缓存失效、GEO、ZSet、Set、Bitmap 支持商铺查询、附近商铺、点赞、关注、Feed 流和签到。',
-            '使用 Redis Lua 原子化校验优惠券库存和一人一单约束，并完成库存预扣减和购买资格记录。',
-            '基于 RabbitMQ 实现优惠券订单异步创建，包含 PROCESSING 状态持久化、publisher confirm、return callback、手动 ACK 和死信队列。',
-            '加入 Redis 回滚和超时 PROCESSING 订单定时补偿，降低 MQ 或消费者失败后的 Redis/MySQL 不一致风险。',
-            '结合 Redisson 用户级锁和 MySQL 唯一索引，防止高并发下重复下单。',
-            '提供 Docker Compose 部署，统一启动应用、MySQL、Redis 和 RabbitMQ。',
+            '实现手机验证码登录、Redis token 存储、商铺缓存、GEO 附近商铺、ZSet 点赞/Feed、Set 关注关系和 Bitmap 签到。',
+            '使用 Redis Lua 完成高并发优惠券下单校验，包含库存判断、一人一单、库存预扣减和购买资格记录。',
+            '设计 RabbitMQ 异步订单创建流程，包含 PROCESSING 状态持久化、publisher confirm、return callback、手动 ACK、死信队列、Redis 回滚和超时订单补偿。',
+            '使用 Redisson 分布式锁、RRateLimiter 声明式限流和 MySQL 唯一索引处理并发一致性。',
+            '加入 Elasticsearch 店铺全文搜索和 geo-distance 排序，并维护结构化 ShopDocument 索引。',
+            '基于 Spring AI 构建推荐 Agent，使用 ChatClient、Tool Calling、Chat Memory 和 Redis 用户偏好记忆。',
+            '实现点评语义搜索 RAG 流程，包含 multi-query expansion、HyDE、向量检索、LLM rerank 和情感标签。',
+            '使用 SpringDoc OpenAPI 整理接口文档，并通过 GitHub Actions 补充 CI/CD 支持。',
           ],
         },
         personalPortfolio: {
@@ -262,6 +264,8 @@ export const translations = {
     },
   },
 } as const
+
+
 
 
 
