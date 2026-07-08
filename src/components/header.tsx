@@ -18,13 +18,17 @@ const menuItems = [
 type NavId = (typeof menuItems)[number]['id']
 
 const headerOffset = 96
+const controlClassName = 'inline-flex size-10 items-center justify-center rounded-full border border-zinc-200/80 bg-white/70 text-foreground shadow-sm backdrop-blur-md transition-all duration-300 hover:-translate-y-0.5 hover:bg-white dark:border-white/10 dark:bg-[#34302a]/75 dark:text-[#f6efe5] dark:hover:bg-[#3d372f]'
 
 export const HeroHeader = () => {
     const { t, toggleLanguage } = useLanguage()
     const [menuState, setMenuState] = React.useState(false)
     const [isScrolled, setIsScrolled] = React.useState(false)
     const [activeSection, setActiveSection] = React.useState<NavId>('projects')
-    const [theme, setTheme] = React.useState<'light' | 'dark'>('light')
+    const [theme, setTheme] = React.useState<'light' | 'dark'>(() => {
+        if (typeof window === 'undefined') return 'light'
+        return window.localStorage.getItem('theme') === 'dark' ? 'dark' : 'light'
+    })
     const scrollLockTimeoutRef = React.useRef<number | null>(null)
 
     const updateActiveSection = React.useCallback(() => {
@@ -54,7 +58,6 @@ export const HeroHeader = () => {
         const savedTheme = window.localStorage.getItem('theme')
         const nextTheme = savedTheme === 'dark' ? 'dark' : 'light'
 
-        setTheme(nextTheme)
         document.documentElement.classList.toggle('dark', nextTheme === 'dark')
     }, [])
 
@@ -99,8 +102,9 @@ export const HeroHeader = () => {
         )
 
         sections.forEach((section) => observer.observe(section))
-        updateActiveSection()
+        const frame = window.requestAnimationFrame(updateActiveSection)
         return () => {
+            window.cancelAnimationFrame(frame)
             observer.disconnect()
             if (scrollLockTimeoutRef.current) {
                 window.clearTimeout(scrollLockTimeoutRef.current)
@@ -142,9 +146,7 @@ export const HeroHeader = () => {
         window.localStorage.setItem('theme', nextTheme)
     }
 
-    const controlClassName = 'inline-flex size-10 items-center justify-center rounded-full border border-zinc-200/80 bg-white/70 text-foreground shadow-sm backdrop-blur-md transition-all duration-300 hover:-translate-y-0.5 hover:bg-white dark:border-white/10 dark:bg-[#34302a]/75 dark:text-[#f6efe5] dark:hover:bg-[#3d372f]'
-
-    const ThemeToggle = ({ className }: { className?: string }) => (
+    const renderThemeToggle = (className?: string) => (
         <button
             type="button"
             aria-label="Toggle theme"
@@ -155,7 +157,7 @@ export const HeroHeader = () => {
         </button>
     )
 
-    const LanguageToggle = ({ className }: { className?: string }) => (
+    const renderLanguageToggle = (className?: string) => (
         <button
             type="button"
             aria-label="Toggle language"
@@ -184,8 +186,8 @@ export const HeroHeader = () => {
                                 <X className="in-data-[state=active]:rotate-0 in-data-[state=active]:scale-100 in-data-[state=active]:opacity-100 absolute inset-0 m-auto size-6 -rotate-180 scale-0 opacity-0 duration-200" />
                             </button>
                             <div className="flex items-center gap-2 lg:hidden">
-                                <LanguageToggle />
-                                <ThemeToggle />
+                                {renderLanguageToggle()}
+                                {renderThemeToggle()}
                             </div>
                         </div>
 
@@ -250,8 +252,8 @@ export const HeroHeader = () => {
                                 </ul>
                             </div>
                             <div className="hidden items-center gap-2 lg:flex">
-                                <LanguageToggle />
-                                <ThemeToggle />
+                                {renderLanguageToggle()}
+                                {renderThemeToggle()}
                             </div>
                         </div>
                     </div>
