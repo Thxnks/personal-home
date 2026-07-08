@@ -88,20 +88,20 @@ export const translations = {
     skills: {
       eyebrow: 'Skills',
       title: 'Technical Focus',
-      positioning: 'Java Backend × AI Application',
-      intro: 'A compact map of the technologies I use in backend projects and AI-powered tools.',
+      positioning: 'LLM Application × Agent Development',
+      intro: 'A compact map of the technical directions I keep learning and practicing across LLM applications, AI agents, tool calling, and web product delivery.',
       groups: {
         backendCore: {
-          title: 'Backend Core',
-          description: 'Core technologies for Java backend development.',
+          title: 'Agent Core',
+          description: 'I focus on agent task planning, tool calling, memory mechanisms, and multi-turn interaction capabilities.',
         },
         engineeringPractice: {
-          title: 'Engineering Practice',
-          description: 'Tools and patterns practiced in real backend projects.',
+          title: 'LLM Application Engineering',
+          description: 'I practice model API integration, prompt design, context management, and application integration in projects.',
         },
         aiApplication: {
-          title: 'AI Application',
-          description: 'AI technologies I am learning to connect with backend systems.',
+          title: 'Web Productization',
+          description: 'I want to turn AI capabilities into usable web applications, especially companion agents and human-AI interaction experiences.',
         },
       },
     },
@@ -218,20 +218,20 @@ export const translations = {
     skills: {
       eyebrow: '技能',
       title: '技术方向',
-      positioning: 'Java 后端 × AI 应用',
-      intro: '这里整理了我在后端项目和 AI 应用开发中主要使用、实践和探索的技术方向。',
+      positioning: 'LLM 应用 × Agent 开发',
+      intro: '这里整理了我在 LLM 应用、AI Agent、工具调用和 Web 产品化过程中持续学习与实践的技术方向。',
       groups: {
         backendCore: {
-          title: '后端核心',
-          description: '我在 Java 后端学习和项目开发中主要使用的核心技术。',
+          title: 'Agent 核心',
+          description: '我重点关注智能体的任务规划、工具调用、记忆机制与多轮交互能力。',
         },
         engineeringPractice: {
-          title: '工程实践',
-          description: '我在实际项目中练习过的认证、消息队列、部署和工程化相关技术。',
+          title: 'LLM 应用工程',
+          description: '我在项目中实践大模型 API 接入、提示词设计、上下文管理和应用集成。',
         },
         aiApplication: {
-          title: 'AI 应用',
-          description: '我正在学习如何把 AI 能力接入后端系统。',
+          title: 'Web 产品化',
+          description: '我希望把 AI 能力做成真实可用的 Web 应用，尤其关注陪伴型 Agent 和人机交互体验。'
         },
       },
     },

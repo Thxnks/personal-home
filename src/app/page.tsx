@@ -1,4 +1,4 @@
-﻿'use client'
+'use client'
 
 import type { CSSProperties } from "react"
 import { BackToTop } from "@/components/back-to-top"
@@ -12,17 +12,17 @@ const capabilityGroups = [
   {
     key: "backendCore",
     index: "01",
-    skills: ["Java", "Spring Boot", "MySQL", "Redis", "RESTful API", "MyBatis-Plus"],
+    skills: ["AI Agent", "Tool Calling", "Function Calling", "MCP", "RAG", "Memory", "Planning"],
   },
   {
     key: "engineeringPractice",
     index: "02",
-    skills: ["RabbitMQ", "Redisson", "Docker", "Docker Compose", "Spring Security", "JWT", "Flyway", "Linux", "Git"],
+    skills: ["LLM API", "Prompt Engineering", "Context Engineering", "LangChain", "DashScope", "Claude API", "OpenAI API", "Embedding"],
   },
   {
     key: "aiApplication",
     index: "03",
-    skills: ["LangChain4j", "DashScope", "AI Agent", "RAG", "Tool Calling", "Vue 3", "LLM API"],
+    skills: ["Python", "TypeScript", "Vue 3", "Web App", "FastAPI", "Docker", "Git", "Companion Agent"],
   },
 ] as const
 
